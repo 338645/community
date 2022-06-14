@@ -1,6 +1,7 @@
 package com.hacg.community.comtroller;
 
 import com.hacg.community.dto.AccessTokenDto;
+import com.hacg.community.dto.GithubUser;
 import com.hacg.community.utils.GithubUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,11 @@ public class WebController {
         accessTokenDto.setCode(code);
         accessTokenDto.setRedirect_uri("http://localhost:8887/callback");
         accessTokenDto.setState(state);
-        githubUtil.getAccess_token(accessTokenDto);
+
+        //向github获取access_token
+        String accessToken = githubUtil.getAccess_token(accessTokenDto);
+        //使用获得的access_token向github获取用户信息
+        GithubUser user = githubUtil.getUser(accessToken);
 
         return "index";
     }
