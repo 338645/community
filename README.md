@@ -1,6 +1,6 @@
-##hacg  community
+##  Hacg Community
 
-##资料
+##  资料
 
 参考开源项目地址：https://github.com/codedrinker/community
 
@@ -12,6 +12,6 @@ vim编辑器的命令：https://blog.csdn.net/weixin_54363263/article/details/12
 
 ssh添加教程：https://blog.csdn.net/cider_m/article/details/122868407
 
-##工具 
+##  工具 
 
 vim-pc版github地址：https://github.com/vim/vim-win32-installer/releases
