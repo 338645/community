@@ -12,7 +12,7 @@ UI框架：bootstrap
 
 ##  资料
 
-[考开源项目地址](https://github.com/codedrinker/community)
+[参考开源项目地址](https://github.com/codedrinker/community)
 
 [springboot开发指导文档](https://spring.io/guides)
 
