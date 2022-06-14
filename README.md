@@ -18,6 +18,7 @@ UI框架：bootstrap
 
 [gitHubApi登录功能网址](https://docs.github.com/cn/developers/apps/building-oauth-apps/creating-an-oauth-app)
 
+<<<<<<< HEAD
 [gitHubApi授权APP实现教程](https://docs.github.com/cn/developers/apps/building-oauth-apps/authorizing-oauth-apps)
 
 [bootstrap资料地址](https://v3.bootcss.com/components/)
@@ -26,10 +27,19 @@ UI框架：bootstrap
 
 [vim编辑器的命令](https://blog.csdn.net/weixin_54363263/article/details/120790827)
 
+=======
+[bootstrap资料地址](https://v3.bootcss.com/components/)
+
+[vim-pc版安装教程](https://blog.csdn.net/weixin_54363263/article/details/120790827)
+
+[vim编辑器的命令](https://blog.csdn.net/weixin_54363263/article/details/120790827)
+
+>>>>>>> d434cafacaab736edb244972dcfbb5ca8281d6f7
 [ssh添加教程](https://blog.csdn.net/cider_m/article/details/122868407)
 
 ##  工具 
 
+<<<<<<< HEAD
 [visual Paradigm](https://www.visual-paradigm.com)
 
 [vim-pc版github地址](https://github.com/vim/vim-win32-installer/releases)
@@ -43,3 +53,6 @@ UI框架：bootstrap
 
 #### 1、为什么手动布置web应用是，无法访问到html页面，报404错误
 ![question1_img.png](question1_img.png)
+=======
+[vim-pc版github地址](https://github.com/vim/vim-win32-installer/releases)
+>>>>>>> d434cafacaab736edb244972dcfbb5ca8281d6f7
