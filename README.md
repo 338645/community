@@ -26,6 +26,12 @@ UI框架：bootstrap
 
 [vim编辑器的命令](https://blog.csdn.net/weixin_54363263/article/details/120790827)
 
+[bootstrap资料地址](https://v3.bootcss.com/components/)
+
+[vim-pc版安装教程](https://blog.csdn.net/weixin_54363263/article/details/120790827)
+
+[vim编辑器的命令](https://blog.csdn.net/weixin_54363263/article/details/120790827)
+
 [ssh添加教程](https://blog.csdn.net/cider_m/article/details/122868407)
 
 ##  工具 
