@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -32,7 +31,7 @@ import java.util.UUID;
  */
 
 @Controller
-public class WebController {
+public class AuthorizeController {
 
     //关于github登录的工具类
     @Autowired
@@ -51,13 +50,6 @@ public class WebController {
     private String redirect_uri;
 
 
-    //默认访问首页controller
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
-
     /**
      * @param code:从github的authorize传入的code，用于post给github的access_token
      * @param state：防止跨站请求伪造攻击的随机数
@@ -66,7 +58,8 @@ public class WebController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) {
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
         accessTokenDto.setClient_id(client_id);
         accessTokenDto.setClient_secret(client_secret);
@@ -82,18 +75,19 @@ public class WebController {
 
         if (githubUtilUser != null) {
             //登录成功操作
-            //将用户信息写入session
-            request.getSession().setAttribute("user",githubUtilUser);
-            //发送给浏览器一个cookie，设置一个过期时间
-
             //将用户信息存入数据库
+            String token = UUID.randomUUID().toString();
+
             User user = new User();
             user.setAccount_id(String.valueOf(githubUtilUser.getId()));
             user.setName(githubUtilUser.getName());
-            user.setToken(UUID.randomUUID().toString());
+            user.setToken(token);
             user.setGmt_create(System.currentTimeMillis());
             user.setGmt_modified(user.getGmt_create());
             userMapper.insertUser(user);
+
+            //发送给浏览器一个cookie，默认expire时间为session
+            response.addCookie(new Cookie("token",token));
             //重定向回到首页
             return "redirect:/";
         } else {

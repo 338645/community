@@ -87,6 +87,26 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
+            <!--flyway插件-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.5.12</version>
+                <configuration>
+                    <url>jdbc:h2:~/community</url>
+                    <user>susu</user>
+                    <password>123456</password>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>2.1.210</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 

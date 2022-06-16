@@ -62,6 +62,8 @@ UI框架：bootstrap
 
 [okHttp地址](https://square.github.io/okhttp/)
 
+[flyway migration地址](https://flywaydb.org/)
+
 ## github授权APP登录流程图
 
 ![github_Sequence_diagram.png](github_Sequence_diagram.png)
