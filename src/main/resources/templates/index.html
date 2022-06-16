@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Hacg论坛</title>
@@ -33,16 +34,24 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/login/oauth/authorize?client_id=ae6d4adb632935201bcb&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a></li>
-                <li class="dropdown">
+
+                <!--除了为true的时候不显示，其他时候都显示-->
+                <li th:unless="${session.user != null}">
+                    <a href="https://github.com/login/oauth/authorize?client_id=ae6d4adb632935201bcb&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                </li>
+
+
+                <!--除了为true时候显示，其他时候不显示-->
+                <li class="dropdown" th:if="${session.user !=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">我<span class="caret"></span></a>
+                       aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>
                         <li><a href="#">退出登录</a></li>
                     </ul>
                 </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

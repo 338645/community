@@ -2,9 +2,9 @@
 
 ## 框架
 
-后端框架：springboot
+后端框架：springboot+Mybatis
 
-数据库：mysql
+数据库：mysql,H2
 
 UI框架：bootstrap
 
@@ -15,6 +15,8 @@ UI框架：bootstrap
 [参考开源项目地址](https://github.com/codedrinker/community)
 
 [springboot开发指导文档](https://spring.io/guides)
+
+[springboot文档](https://spring.io/docs)
 
 [gitHubApi登录功能网址](https://docs.github.com/cn/developers/apps/building-oauth-apps/creating-an-oauth-app)
 
@@ -41,6 +43,16 @@ UI框架：bootstrap
 [ssh添加教程](https://blog.csdn.net/cider_m/article/details/122868407)
 
 [maven仓库](https://www.mvnrepository.com)
+
+[mysql学习网站](https://www.runoob.com/mysql)
+
+[H2官网](https://www.h2database.com/html/main.html)
+
+[Spring集成H2数据库教程](https://blog.csdn.net/zhangtao0417/article/details/104794912?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-104794912-blog-108519392.pc_relevant_antiscanv4&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1-104794912-blog-108519392.pc_relevant_antiscanv4&utm_relevant_index=1)
+
+[Mybatis说明手册](http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
+
+[maven配置阿里云](https://blog.csdn.net/Y_6155/article/details/123775981)
 
 ## 工具
 
