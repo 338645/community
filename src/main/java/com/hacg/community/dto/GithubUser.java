@@ -2,40 +2,34 @@ package com.hacg.community.dto;
 
 public class GithubUser {
     private String name;
-    private long id;
+    private Long id;
     private String bio;
 
-    public GithubUser() {
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public GithubUser(String name, long id, String bio) {
-        this.name = name;
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public GithubUser() {
     }
 
     public String getName() {
         return name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     public String getBio() {
         return bio;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
     }
 
     @Override

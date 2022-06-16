@@ -73,7 +73,7 @@ public class AuthorizeController {
         GithubUser githubUtilUser = githubUtil.getUser(accessToken);
 
 
-        if (githubUtilUser != null) {
+        if(githubUtilUser != null && githubUtilUser.getId()!=null) {
             //登录成功操作
             //将用户信息存入数据库
             String token = UUID.randomUUID().toString();
@@ -84,6 +84,7 @@ public class AuthorizeController {
             user.setToken(token);
             user.setGmt_create(System.currentTimeMillis());
             user.setGmt_modified(user.getGmt_create());
+
             userMapper.insertUser(user);
 
             //发送给浏览器一个cookie，默认expire时间为session

@@ -1,14 +1,14 @@
 package com.hacg.community.model;
 
 public class User {
-    private int id;
+    private Integer id;
     private String account_id;
     private String name;
     private String token;
-    private long gmt_create;
-    private long gmt_modified;
+    private Long gmt_create;
+    private Long gmt_modified;
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,16 +24,12 @@ public class User {
         this.token = token;
     }
 
-    public void setGmt_create(long gmt_create) {
+    public void setGmt_create(Long gmt_create) {
         this.gmt_create = gmt_create;
     }
 
-    public void setGmt_modified(long gmt_modified) {
+    public void setGmt_modified(Long gmt_modified) {
         this.gmt_modified = gmt_modified;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getAccount_id() {
@@ -48,11 +44,15 @@ public class User {
         return token;
     }
 
-    public long getGmt_create() {
+    public Long getGmt_create() {
         return gmt_create;
     }
 
-    public long getGmt_modified() {
+    public Long getGmt_modified() {
         return gmt_modified;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

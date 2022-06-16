@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/community.css">
+
+    <!--暂定的警告弹框-->
+    <script>
+        $(function () {
+            // 执行代码
+            var message = $('input[name="error"]').val();
+            if (message != "") {
+                alert(message);
+            }
+        });
+    </script>
+
 </head>
 <body class="body">
 
@@ -35,9 +47,11 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button class="btn btn-primary navbar-btn" type="button">
-                        发起问题 <span class="badge">+</span>
-                    </button>
+                    <form action="/publish" method="get">
+                        <button class="btn btn-primary navbar-btn" type="submit">
+                            发起问题 <span class="badge">+</span>
+                        </button>
+                    </form>
                 </li>
 
                 <!--除了为true的时候不显示，其他时候都显示-->
@@ -68,10 +82,11 @@
 
         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发表</h2>
-            <form action="#">
+
+            <form action="/publish" method="post">
                 <div class="form-group">
                     <label for="title">问题标题（简单扼要）</label>
-                    <input type="email" class="form-control" id="title" name="title" placeholder="问题标题">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题">
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充</label>
@@ -85,13 +100,16 @@
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签：</label>
-                    <input type="email" class="form-control" id="tag" name="tag" placeholder="添加标签，以逗号隔开">
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="添加标签，以逗号隔开">
                 </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox"> 匿名</a>
                     </label>
                 </div>
+
+                <input type="hidden" name="error" th:value="${error}" id="error"/>
+
                 <button type="submit" class="btn btn-success btn_publish">发布</button>
             </form>
         </div>
