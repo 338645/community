@@ -55,4 +55,16 @@ public class User {
     public Integer getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", account_id='" + account_id + '\'' +
+                ", name='" + name + '\'' +
+                ", token='" + token + '\'' +
+                ", gmt_create=" + gmt_create +
+                ", gmt_modified=" + gmt_modified +
+                '}';
+    }
 }

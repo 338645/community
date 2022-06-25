@@ -54,6 +54,18 @@ UI框架：bootstrap
 
 [maven配置阿里云](https://blog.csdn.net/Y_6155/article/details/123775981)
 
+[安装证书工具](https://shanhy.blog.csdn.net/article/details/51155224?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-51155224-blog-81531746.pc_relevant_antiscanv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-51155224-blog-81531746.pc_relevant_antiscanv3&utm_relevant_index=2)
+
+[npm使用教程](https://www.runoob.com/nodejs/nodejs-npm.html#taobaonpm)
+
+[后端解决cross问题](https://blog.csdn.net/JokerLJG/article/details/123659384)
+
+[新版本springboot配置cross全局配置解决方法](https://blog.csdn.net/luncky_dog/article/details/116531547)
+
+[使用@CrossOrign注解解决跨域问题](https://blog.csdn.net/zhongguowangzhan/article/details/122851290)
+
+[okHttp绕过https验证方法](https://blog.csdn.net/wcy18818429914/article/details/107691896)
+
 ## 工具
 
 [visual Paradigm](https://www.visual-paradigm.com)

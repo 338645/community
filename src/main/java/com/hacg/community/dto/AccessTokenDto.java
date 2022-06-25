@@ -1,7 +1,5 @@
 package com.hacg.community.dto;
 
-import com.sun.tracing.dtrace.Attributes;
-
 public class AccessTokenDto {
     private String client_id;
     private String client_secret;

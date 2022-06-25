@@ -1,20 +1,24 @@
 package com.hacg.community.comtroller;
 
-import com.hacg.community.dto.AccessTokenDto;
-import com.hacg.community.dto.GithubUser;
-import com.hacg.community.mapper.UserMapper;
 import com.hacg.community.model.User;
-import com.hacg.community.utils.GithubUtil;
+import com.hacg.community.service.UserService;
+import com.hacg.community.utils.SSLSocketClientUtil;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.net.ssl.X509TrustManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
+import java.io.IOException;
 
 /**
  * 项目关于web操作相关控制器
@@ -30,25 +34,21 @@ import java.util.UUID;
  * 4. //dirname 这种路径，浏览器会将协议头和该api拼接。
  */
 
-@Controller
+@CrossOrigin
+@RestController
 public class AuthorizeController {
 
-    //关于github登录的工具类
-    @Autowired
-    private GithubUtil githubUtil;
+    /**
+     * vue项目github登录步骤，
+     * vue页面访问login接口
+     * login接口发起authorize请求
+     * github重定向到callback
+     * 完成登录返回用户数据
+     * 返回成功后，前端把resp的data里的数据填入页面
+     */
 
     @Autowired
-    private UserMapper userMapper;
-
-    @Value("${github.client_id}")
-    private String client_id;
-
-    @Value("${github.client_secret}")
-    private String client_secret;
-
-    @Value("${github.redirect_uri}")
-    private String redirect_uri;
-
+    private UserService userService;
 
     /**
      * @param code:从github的authorize传入的code，用于post给github的access_token
@@ -56,46 +56,22 @@ public class AuthorizeController {
      * @return
      */
     @GetMapping("/callback")
-    public String callback(@RequestParam(name = "code") String code,
-                           @RequestParam(name = "state") String state,
-                           HttpServletRequest request,
-                           HttpServletResponse response) {
-        AccessTokenDto accessTokenDto = new AccessTokenDto();
-        accessTokenDto.setClient_id(client_id);
-        accessTokenDto.setClient_secret(client_secret);
-        accessTokenDto.setCode(code);
-        accessTokenDto.setRedirect_uri(redirect_uri);
-        accessTokenDto.setState(state);
+    public User callback(@RequestParam(name = "code") String code,
+                         @RequestParam(name = "state") String state,
+                         HttpServletResponse response) {
+        //插入用户
+        User user = userService.insertUser(code, state);
 
-        //向github获取access_token
-        String accessToken = githubUtil.getAccess_token(accessTokenDto);
-        //使用获得的access_token向github获取用户信息
-        GithubUser githubUtilUser = githubUtil.getUser(accessToken);
+        System.out.println(1);
 
-
-        if(githubUtilUser != null && githubUtilUser.getId()!=null) {
-            //登录成功操作
-            //将用户信息存入数据库
-            String token = UUID.randomUUID().toString();
-
-            User user = new User();
-            user.setAccount_id(String.valueOf(githubUtilUser.getId()));
-            user.setName(githubUtilUser.getName());
-            user.setToken(token);
-            user.setGmt_create(System.currentTimeMillis());
-            user.setGmt_modified(user.getGmt_create());
-
-            userMapper.insertUser(user);
-
+        if (user != null) {
             //发送给浏览器一个cookie，默认expire时间为session
-            response.addCookie(new Cookie("token",token));
-            //重定向回到首页
-            return "redirect:/";
+            response.addCookie(new Cookie("token", user.getToken()));
+            //登录成功返回用户
+            return user;
         } else {
             //登录失败操作
-
-            //重定向回到首页
-            return "redirect:/";
+            return null;
         }
     }
 

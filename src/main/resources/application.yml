@@ -1,0 +1,17 @@
+#tomcat服务器配置
+server:
+  port: 8887
+
+#github第三方授权令牌设置
+github:
+  client_id: "ae6d4adb632935201bcb"
+  client_secret: "ce3064a20497fb4c8cb1a61c84190c2622228d08"
+  redirect_uri: "http://localhost:8887/callback"
+
+#Mybatis的配置
+spring:
+  datasource:
+    url: "jdbc:h2:~/community;MODE=MySQL"
+    username: "susu"
+    password: "123456"
+    driver-class-name: "org.h2.Driver"
