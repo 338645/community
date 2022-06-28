@@ -1,8 +1,18 @@
 package com.hacg.community.model;
 
+import com.hacg.community.groups.publish.QuestionDefault;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+/**
+ * 需要引入hibernate-validator
+ */
 public class Question {
     private Integer id;
+    @NotBlank(message = "问题标题不能为空", groups = {QuestionDefault.class})
     private String title;
+    @NotBlank(message = "问题描述不能为空", groups = {QuestionDefault.class})
     private String description;
     private Long gmt_create;
     private Long gmt_modified;
@@ -10,6 +20,8 @@ public class Question {
     private Integer comment_count;
     private Integer view_count;
     private Integer like_count;
+    @NotBlank(message = "标签不能为空", groups = {QuestionDefault.class})
+    @Pattern(regexp = "^(\\w*,)*$", message = "标签的格式必须为:xxx,xxx,...s", groups = {QuestionDefault.class})
     private String tag;
 
     public void setId(Integer id) {
@@ -90,5 +102,10 @@ public class Question {
 
     public String getTag() {
         return tag;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" + "id=" + id + ", title='" + title + '\'' + ", description='" + description + '\'' + ", gmt_create=" + gmt_create + ", gmt_modified=" + gmt_modified + ", creator=" + creator + ", comment_count=" + comment_count + ", view_count=" + view_count + ", like_count=" + like_count + ", tag='" + tag + '\'' + '}';
     }
 }

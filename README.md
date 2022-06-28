@@ -6,13 +6,17 @@
 
 数据库：mysql,H2
 
-UI框架：bootstrap
+UI框架：vue+element-plus
 
 登录功能：GitHub-API
+
+后端验证工具:hibernate-validator
 
 ## 资料
 
 [参考开源项目地址](https://github.com/codedrinker/community)
+
+[hibernate-validator我的github学习地址](https://github.com/338645/hibernate-validator)
 
 [springboot开发指导文档](https://spring.io/guides)
 
@@ -75,6 +79,8 @@ UI框架：bootstrap
 [okHttp地址](https://square.github.io/okhttp/)
 
 [flyway migration地址](https://flywaydb.org/)
+
+[hibernate-validator地址](https://hibernate.org/validator/)
 
 ## github授权APP登录流程图
 

@@ -2,23 +2,12 @@ package com.hacg.community.comtroller;
 
 import com.hacg.community.model.User;
 import com.hacg.community.service.UserService;
-import com.hacg.community.utils.SSLSocketClientUtil;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.net.ssl.X509TrustManager;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * 项目关于web操作相关控制器
@@ -34,7 +23,7 @@ import java.io.IOException;
  * 4. //dirname 这种路径，浏览器会将协议头和该api拼接。
  */
 
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true", originPatterns = "*")
 @RestController
 public class AuthorizeController {
 
@@ -58,15 +47,16 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public User callback(@RequestParam(name = "code") String code,
                          @RequestParam(name = "state") String state,
+                         HttpServletRequest request,
                          HttpServletResponse response) {
         //插入用户
         User user = userService.insertUser(code, state);
 
-        System.out.println(1);
 
         if (user != null) {
             //发送给浏览器一个cookie，默认expire时间为session
             response.addCookie(new Cookie("token", user.getToken()));
+            request.getSession().setAttribute("user", user);
             //登录成功返回用户
             return user;
         } else {
@@ -75,5 +65,9 @@ public class AuthorizeController {
         }
     }
 
-
+    @PostMapping("/getUserByToken")
+    public User getUserByToken(@RequestBody User user1) {
+        User user = userService.selectByToken(user1.getToken());
+        return user;
+    }
 }

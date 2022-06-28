@@ -60,4 +60,9 @@ public class UserService {
 
         return user;
     }
+
+    public User selectByToken(String token) {
+        User user = userMapper.findByToken(token);
+        return user;
+    }
 }

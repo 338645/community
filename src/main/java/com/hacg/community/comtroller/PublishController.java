@@ -1,53 +1,47 @@
 package com.hacg.community.comtroller;
 
+import com.hacg.community.groups.publish.QuestionDefault;
 import com.hacg.community.mapper.QuestionMapper;
 import com.hacg.community.model.Question;
 import com.hacg.community.model.User;
-import org.apache.ibatis.annotations.Param;
+import com.hacg.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@CrossOrigin(allowCredentials = "true", originPatterns = "*")
+@RestController
 public class PublishController {
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private UserService userService;
 
-    @GetMapping("/publish")
-    public String publish() {
-        return "publish";
-    }
-
+    //使用hibernate-validator进行后端验证
     @PostMapping("/publish")
     public String doPublish(
-            @Param("title") String title,
-            @Param("description") String description,
-            @Param("tag") String tag,
+            @RequestBody @Validated(value = {QuestionDefault.class}) Question question,
             HttpServletRequest request,
             Model model
     ) {
-        Question question = new Question();
+        System.out.println(question.toString());
         User user = (User) request.getSession().getAttribute("user");
-
+        System.out.println(user);
         if (user != null && user.getId() != null) question.setCreator(user.getId());
         else {
-            model.addAttribute("error", "用户未登录");
-            return "publish";
+            System.out.println(1);
+            return "请重新登录";
         }
-
-        //有效之后才进行操作
-        question.setTitle(title);
-        question.setDescription(description);
-        question.setTag(tag);
         question.setGmt_create(System.currentTimeMillis());
         question.setGmt_modified(question.getGmt_create());
 
         questionMapper.insertQuestion(question);
-
-        return "redirect:/";
+        return "发表成功";
     }
 }

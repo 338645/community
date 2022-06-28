@@ -1,6 +1,8 @@
 #tomcat服务器配置
 server:
   port: 8887
+  jetty:
+    max-http-form-post-size: -1
 
 #github第三方授权令牌设置
 github:
