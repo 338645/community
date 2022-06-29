@@ -82,6 +82,8 @@ UI框架：vue+element-plus
 
 [hibernate-validator地址](https://hibernate.org/validator/)
 
+[lombok](https://projectlombok.org/)
+
 ## github授权APP登录流程图
 
 ![github_Sequence_diagram.png](github_Sequence_diagram.png)
