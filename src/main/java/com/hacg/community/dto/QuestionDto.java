@@ -26,4 +26,6 @@ public class QuestionDto {
     private String tag;
 
     private User user;
+
+    private Long total;
 }

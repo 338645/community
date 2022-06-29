@@ -1,5 +1,7 @@
 package com.hacg.community.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.QuestionDto;
 import com.hacg.community.mapper.QuestionMapper;
 import com.hacg.community.mapper.UserMapper;
@@ -24,8 +26,12 @@ public class QuestionService {
         questionMapper.insertQuestion(question);
     }
 
-    public List<QuestionDto> findAllQuestions() {
+    public List<QuestionDto> findAllQuestions(Page<Object> page) {
         List<Question> questions = questionMapper.findAllQuestions();
+
+        PageInfo<Object> pageInfo = page.toPageInfo();
+        long total = pageInfo.getTotal();
+
         List<QuestionDto> ret = new LinkedList<>();
         for (Question question : questions) {
             User user = userMapper.selectById(question.getCreator());
@@ -33,6 +39,7 @@ public class QuestionService {
             QuestionDto questionDto = new QuestionDto();
             BeanUtils.copyProperties(question, questionDto);
             questionDto.setUser(user);
+            questionDto.setTotal(total);
             ret.add(questionDto);
         }
         return ret;

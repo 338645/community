@@ -31,6 +31,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!--developerTools依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
         <!--mybatis连接池依赖项-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -105,6 +113,13 @@
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!--加入pageHelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.2</version>
         </dependency>
 
     </dependencies>

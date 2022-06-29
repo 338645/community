@@ -59,6 +59,7 @@ public class AuthorizeController {
             request.getSession().setAttribute("user", user);
             //登录成功返回用户
             return user;
+            //return null;
         } else {
             //登录失败操作
             return null;

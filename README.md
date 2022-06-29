@@ -70,6 +70,8 @@ UI框架：vue+element-plus
 
 [okHttp绕过https验证方法](https://blog.csdn.net/wcy18818429914/article/details/107691896)
 
+[springboot使用pageHelper](https://blog.csdn.net/qq_37699336/article/details/113795004)
+
 ## 工具
 
 [visual Paradigm](https://www.visual-paradigm.com)
@@ -83,6 +85,8 @@ UI框架：vue+element-plus
 [hibernate-validator地址](https://hibernate.org/validator/)
 
 [lombok](https://projectlombok.org/)
+
+[Developer tool](https://docs.spring.io/spring-boot/docs/2.0.0.M3/reference/htmlsingle/#using-boot-devtools-globalsettings)
 
 ## github授权APP登录流程图
 
