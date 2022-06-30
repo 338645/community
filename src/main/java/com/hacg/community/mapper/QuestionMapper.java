@@ -3,6 +3,7 @@ package com.hacg.community.mapper;
 import com.hacg.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -15,4 +16,16 @@ public interface QuestionMapper {
 
     @Select("select * from questions")
     List<Question> findAllQuestions();
+
+
+    @Select({"<script>",
+            "select * from questions",
+            "where ",
+            " creator in",
+            "<foreach collection='ids' item='value' index='index' open='(' close=')' separator=','>",
+            "${value}",
+            "</foreach>",
+            "</script>"
+    })
+    List<Question> findQuestionsByUser(@Param("ids") List<Integer> ids);
 }

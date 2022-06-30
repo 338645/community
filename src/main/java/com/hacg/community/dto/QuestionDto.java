@@ -27,5 +27,4 @@ public class QuestionDto {
 
     private User user;
 
-    private Long total;
 }

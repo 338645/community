@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -65,5 +66,9 @@ public class UserService {
     public User selectByToken(String token) {
         User user = userMapper.findByToken(token);
         return user;
+    }
+
+    public List<Integer> selectByAccountId(String userId) {
+        return userMapper.selectByAccountId(userId);
     }
 }

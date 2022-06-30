@@ -1,7 +1,5 @@
 package com.hacg.community.service;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.QuestionDto;
 import com.hacg.community.mapper.QuestionMapper;
 import com.hacg.community.mapper.UserMapper;
@@ -11,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,14 +22,16 @@ public class QuestionService {
     private UserMapper userMapper;
 
     public void insertQuestion(Question question) {
+        //分离标签
+
+        //插入标签数据库，标签对应相对问题的id
+
         questionMapper.insertQuestion(question);
     }
 
-    public List<QuestionDto> findAllQuestions(Page<Object> page) {
+    public List<QuestionDto> findAllQuestions() {
         List<Question> questions = questionMapper.findAllQuestions();
 
-        PageInfo<Object> pageInfo = page.toPageInfo();
-        long total = pageInfo.getTotal();
 
         List<QuestionDto> ret = new LinkedList<>();
         for (Question question : questions) {
@@ -39,9 +40,24 @@ public class QuestionService {
             QuestionDto questionDto = new QuestionDto();
             BeanUtils.copyProperties(question, questionDto);
             questionDto.setUser(user);
-            questionDto.setTotal(total);
             ret.add(questionDto);
         }
+        return ret;
+    }
+
+    public List<QuestionDto> findQuestionsByUser(List<Integer> ids) {
+        List<Question> questions = questionMapper.findQuestionsByUser(ids);
+
+        List<QuestionDto> ret = new LinkedList<>();
+        for (Question question : questions) {
+            User user = userMapper.selectById(question.getCreator());
+
+            QuestionDto questionDto = new QuestionDto();
+            BeanUtils.copyProperties(question, questionDto);
+            questionDto.setUser(user);
+            ret.add(questionDto);
+        }
+        System.out.println(ret);
         return ret;
     }
 }
