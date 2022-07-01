@@ -4,17 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.QuestionDto;
+import com.hacg.community.groups.publish.QuestionDefault;
 import com.hacg.community.service.QuestionService;
 import com.hacg.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.util.ListUtils;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -56,5 +53,17 @@ public class QuestionController {
         long total = pageInfo.getTotal();
         response.addCookie(new Cookie("UserQuestionTotal", String.valueOf(total)));
         return questions;
+    }
+
+    @PostMapping("/updateQuestion")
+    public int updateQuestion(@RequestBody @Validated(value = {QuestionDefault.class}) QuestionDto questionDto) {
+        int count = questionService.updateQuestion(questionDto);
+        return count;
+    }
+
+    @GetMapping("/deleteQuestion")
+    public int deleteQuestion(@RequestParam(name = "id") Integer id) {
+        int count = questionService.deleteQuestion(id);
+        return count;
     }
 }

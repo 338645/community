@@ -34,7 +34,7 @@ public class Question {
     private Integer like_count;
 
     @NotBlank(message = "标签不能为空", groups = {QuestionDefault.class})
-    @Pattern(regexp = "^([\\u4e00-\\u9fa5 \\w]*,)*$", message = "标签的格式必须为:xxx,xxx,...s", groups = {QuestionDefault.class})
+    @Pattern(regexp = "^([\\u4e00-\\u9fa5 \\w]*,)*[\\u4e00-\\u9fa5 \\w]+$", message = "标签的格式必须为:xxx,xxx,...s", groups = {QuestionDefault.class})
     private String tag;
 
 }

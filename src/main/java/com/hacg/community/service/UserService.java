@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +46,16 @@ public class UserService {
         User user = null;
 
         if (githubUtilUser != null && githubUtilUser.getId() != null) {
+            //从数据库查询access_token，如果有相同的用户则更新后返回
+            user = userMapper.selectByGithubAccount(String.valueOf(githubUtilUser.getId()));
+            if (user != null) {
+                user.setName(githubUtilUser.getName());
+                user.setAvatarUrl(githubUtilUser.getAvatarUrl());
+                user.setBio(githubUtilUser.getBio());
+                user.setGmt_modified(System.currentTimeMillis());
+                userMapper.updateUserByUser(user);
+                return user;
+            }
             //登录成功操作
             //将用户信息存入数据库
             long gmt_create = System.currentTimeMillis();

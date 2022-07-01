@@ -20,4 +20,10 @@ public interface UserMapper {
     @ResultType(value = java.lang.Integer.class)
     @Select("select id from users where account_id = #{userId}")
     List<Integer> selectByAccountId(@Param("userId") String userId);
+
+    @Select("select * from users where account_id = #{userId}")
+    User selectByGithubAccount(@Param("userId") String userId);
+
+    @Update("update users set name=#{name},gmt_modified=#{gmt_modified},bio=#{bio},avatar_url=#{avatarUrl} where id = #{id}")
+    void updateUserByUser(User user);
 }
