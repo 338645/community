@@ -31,6 +31,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!--mybatis2.2.2:需要集成springboot2.5以上版本-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
         <!--developerTools依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,13 +83,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.1.210</version>
-        </dependency>
-
-        <!--mybatis2.2.2:需要集成springboot2.5以上版本-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.2</version>
         </dependency>
 
         <!--加入jakarta的validator的依赖包,3.0.0以上-->
