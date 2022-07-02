@@ -11,6 +11,9 @@
                         password="123456">
         </jdbcConnection>
 
+        <!--mybatis提供的默认分页插件-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
