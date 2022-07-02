@@ -88,6 +88,8 @@ UI框架：vue+element-plus
 
 [Developer tool](https://docs.spring.io/spring-boot/docs/2.0.0.M3/reference/htmlsingle/#using-boot-devtools-globalsettings)
 
+[mybatis generator](https://mybatis.org/generator/)
+
 ## github授权APP登录流程图
 
 ![github_Sequence_diagram.png](github_Sequence_diagram.png)

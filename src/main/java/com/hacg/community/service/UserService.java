@@ -80,4 +80,8 @@ public class UserService {
     public List<Integer> selectByAccountId(String userId) {
         return userMapper.selectByAccountId(userId);
     }
+
+    public User selectById(Integer userId) {
+        return userMapper.selectById(userId);
+    }
 }

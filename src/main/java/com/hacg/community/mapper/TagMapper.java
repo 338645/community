@@ -3,6 +3,9 @@ package com.hacg.community.mapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface TagMapper {
@@ -14,4 +17,7 @@ public interface TagMapper {
 
     @Delete("delete from tags where question_id = #{id}")
     int deleteQuestionByQId(Integer id);
+
+    @Select("select distinct tag from tags")
+    List<String> selectTags();
 }

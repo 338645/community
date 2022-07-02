@@ -35,4 +35,13 @@ public interface QuestionMapper {
 
     @Delete("delete from questions where id = #{id}")
     int deleteQuestion(Integer id);
+
+    @Update("update questions set view_count = view_count+1 where id = #{questId}")
+    int updateViewCount(@Param("questId") Integer questionId);
+
+    @Update("update questions set comment_count = comment_count+1 where id = #{questId}")
+    void updateCommentCount(@Param("questId") Integer questId);
+
+    @Select("select * from questions where id = #{questId}")
+    Question getQuestionById(@Param("questId") Integer questId);
 }

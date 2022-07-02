@@ -2,6 +2,7 @@ package com.hacg.community.service;
 
 import com.hacg.community.dto.QuestionDto;
 import com.hacg.community.mapper.QuestionMapper;
+import com.hacg.community.mapper.ReplyMapper;
 import com.hacg.community.mapper.TagMapper;
 import com.hacg.community.mapper.UserMapper;
 import com.hacg.community.model.Question;
@@ -9,7 +10,6 @@ import com.hacg.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +24,9 @@ public class QuestionService {
 
     @Autowired
     private TagMapper tagMapper;
+
+    @Autowired
+    private ReplyMapper replyMapper;
 
     public void insertQuestion(Question question) {
         questionMapper.insertQuestion(question);
@@ -103,8 +106,21 @@ public class QuestionService {
         //从标签库里删除相关的问题
         int count = 0;
         count += tagMapper.deleteQuestionByQId(id);
+        //从回复库中中删除相关回复
+        count += replyMapper.deleteReplyByQuestId(id);
         //从问题库里删除相关问题
         count += questionMapper.deleteQuestion(id);
         return count;
+    }
+
+    public int updateViewCount(Integer questionId) {
+        return questionMapper.updateViewCount(questionId);
+    }
+
+    public QuestionDto getQuestionById(Integer questId) {
+        Question question = questionMapper.getQuestionById(questId);
+        QuestionDto questionDto = new QuestionDto();
+        BeanUtils.copyProperties(question, questionDto);
+        return questionDto;
     }
 }

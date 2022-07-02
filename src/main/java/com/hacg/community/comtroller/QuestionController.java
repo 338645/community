@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.QuestionDto;
 import com.hacg.community.groups.publish.QuestionDefault;
+import com.hacg.community.model.Question;
 import com.hacg.community.service.QuestionService;
 import com.hacg.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,15 @@ public class QuestionController {
     public int deleteQuestion(@RequestParam(name = "id") Integer id) {
         int count = questionService.deleteQuestion(id);
         return count;
+    }
+
+    @GetMapping("/updateViewCount")
+    public int updateViewCount(@RequestParam("questId") Integer questionId) {
+        return questionService.updateViewCount(questionId);
+    }
+
+    @GetMapping("/getQuestionById")
+    public QuestionDto getQuestionById(@RequestParam("questId") Integer questId) {
+        return questionService.getQuestionById(questId);
     }
 }
