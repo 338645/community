@@ -6,6 +6,7 @@ create table REPLYDB
     REPLY        CHARACTER VARYING(255),
     GMT_CREATE   BIGINT,
     GMT_MODIFIED BIGINT,
+    PARENT       INTEGER,
     constraint REPLY_PK
         primary key (ID)
 );

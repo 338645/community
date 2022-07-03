@@ -18,6 +18,6 @@ public interface ReplyMapper {
     @Delete("delete from replydb where quest_id = #{questId}")
     int deleteReplyByQuestId(@Param("questId") Integer id);
 
-    @Select("select * from replydb where quest_id = #{questId}")
+    @Select("select * from replydb where quest_id = #{questId} and parent is null")
     List<Reply> findReplyByQuestId(@Param("questId") Integer questionId);
 }
