@@ -10,6 +10,7 @@ import com.hacg.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -77,6 +78,8 @@ public class QuestionService {
         return count;
     }
 
+    //添加事务
+    @Transactional
     public int updateTags(QuestionDto questionDto) {
         //从数据库查询到原来的标签
         Question question = questionMapper.findQuestionById(questionDto.getId());
@@ -102,6 +105,8 @@ public class QuestionService {
     }
 
 
+    //添加事务
+    @Transactional
     public int deleteQuestion(Integer id) {
         //从标签库里删除相关的问题
         int count = 0;

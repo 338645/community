@@ -1,5 +1,8 @@
 package com.hacg.community.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.ReplyDto;
 import com.hacg.community.mapper.QuestionMapper;
 import com.hacg.community.mapper.ReplyMapper;
@@ -41,6 +44,20 @@ public class ReplyService {
             ReplyDto replyDto = new ReplyDto();
             BeanUtils.copyProperties(reply, replyDto);
             replyDto.setUser(user);
+            //查询该回复的子回复
+            Page<Object> page = PageHelper.startPage(replyDto.getSubPageInfo().getCurrentPage(), replyDto.getSubPageInfo().getPageSize());
+            List<Reply> subReplys = replyMapper.findReplyByQuestIdAndParentId(questionId, reply.getParent());
+            List<ReplyDto> subReplysD = new LinkedList<>();
+            for (Reply subReply : subReplys) {
+                User user1 = userService.selectById(subReply.getUserId());
+                ReplyDto replyDto1 = new ReplyDto();
+                BeanUtils.copyProperties(subReply, replyDto);
+                replyDto.setUser(user1);
+                subReplysD.add(replyDto1);
+            }
+            PageInfo<Object> pageInfo = page.toPageInfo();
+            replyDto.setSubReplys(subReplysD);
+            replyDto.getSubPageInfo().setTotal(pageInfo.getTotal());
             ret.add(replyDto);
         }
         return ret;

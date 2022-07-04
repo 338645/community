@@ -16,4 +16,6 @@ public class Reply {
     private Long gmtCreate;
 
     private Long gmtModified;
+
+    private Integer parent;
 }
