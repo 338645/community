@@ -1,10 +1,7 @@
 package com.hacg.community.mapper;
 
 import com.hacg.community.model.Reply;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -23,4 +20,7 @@ public interface ReplyMapper {
 
     @Select("select * from replydb where quest_id = #{questionId} and parent =#{parentId}")
     List<Reply> findReplyByQuestIdAndParentId(Integer questionId, Integer parentId);
+
+    @Insert("insert into replydb(user_id,quest_id,reply,gmt_create,gmt_modified,parent) values(#{userId},#{questId},#{reply},#{gmtCreate},#{gmtModified},#{parent})")
+    void insertSubReply(Reply insertReply);
 }

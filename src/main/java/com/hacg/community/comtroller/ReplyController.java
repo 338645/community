@@ -38,4 +38,24 @@ public class ReplyController {
         response.addCookie(new Cookie("ReplyTotal", String.valueOf(total)));
         return ret;
     }
+
+    @PostMapping("insertSubReply")
+    public ReplyDto insertSubReply(@RequestBody ReplyDto reply,
+                                   @RequestParam("subReply") String subReply,
+                                   @RequestParam("userId") Integer userId
+    ) {
+        ReplyDto ret = replyService.insertSubReply(reply, subReply, userId);
+        return ret;
+    }
+
+    @GetMapping("refreshSubReply")
+    public List<ReplyDto> refreshSubReply(
+            @RequestParam("currentPage") Integer currentPage,
+            @RequestParam("pageSize") Integer pageSize,
+            @RequestParam("questId") Integer questId,
+            @RequestParam("parentId") Integer parentId
+    ) {
+        List<ReplyDto> ret = replyService.refreshSubReply(currentPage, pageSize, questId, parentId);
+        return ret;
+    }
 }

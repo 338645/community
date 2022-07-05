@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubPageInfo {
-    private Integer pageSize = 6;
+    private Integer pageSize = 4;
 
     private Integer currentPage = 1;
 

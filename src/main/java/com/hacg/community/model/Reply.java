@@ -1,10 +1,12 @@
 package com.hacg.community.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
+@Builder
 public class Reply {
     private Integer id;
     private Integer userId;
