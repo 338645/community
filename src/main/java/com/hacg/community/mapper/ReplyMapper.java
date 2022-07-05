@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface ReplyMapper {
-
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into replydb(user_id,quest_id,reply,gmt_create,gmt_modified) values(#{userId},#{questId},#{reply},#{gmtCreate},#{gmtModified})")
     int insertReply(Reply reply);
 

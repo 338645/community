@@ -3,9 +3,13 @@ package com.hacg.community.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hacg.community.enums.NotificationStatusEnum;
+import com.hacg.community.enums.NotificationTypeEnum;
 import com.hacg.community.dto.ReplyDto;
+import com.hacg.community.mapper.NotificationMapper;
 import com.hacg.community.mapper.QuestionMapper;
 import com.hacg.community.mapper.ReplyMapper;
+import com.hacg.community.model.Notification;
 import com.hacg.community.model.Reply;
 import com.hacg.community.model.User;
 import org.springframework.beans.BeanUtils;
@@ -22,19 +26,40 @@ public class ReplyService {
     private ReplyMapper replyMapper;
 
     @Autowired
+    private NotificationMapper notificationMapper;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private QuestionMapper questionMapper;
 
+    @Transactional
     public int insertReply(ReplyDto replyDto) {
         //向相关问题的回复数加一
         questionMapper.updateCommentCount(replyDto.getQuestId());
+
+        //插入回复
         Reply reply = Reply.builder().build();
         BeanUtils.copyProperties(replyDto, reply);
         reply.setGmtCreate(System.currentTimeMillis());
         reply.setGmtModified(reply.getGmtCreate());
-        return replyMapper.insertReply(reply);
+        int count = replyMapper.insertReply(reply);
+
+        //新增通知
+        createNotification(reply, NotificationTypeEnum.REPLY_QUESTION, NotificationStatusEnum.UNREAD);
+        return count;
+    }
+
+    private void createNotification(Reply reply, NotificationTypeEnum notifType, NotificationStatusEnum status) {
+        Notification notification = new Notification();
+        notification.setOuterid(reply.getId());
+        notification.setNotifier(reply.getUserId());
+        notification.setReceiver(questionMapper.findQuestionById(reply.getQuestId()).getCreator());
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(notifType.getType());
+        notification.setStatus(status.getStatus());
+        notificationMapper.insert(notification);
     }
 
     public List<ReplyDto> getReplys(Integer questionId) {
