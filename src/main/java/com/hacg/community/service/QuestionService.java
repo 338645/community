@@ -41,9 +41,13 @@ public class QuestionService {
         }
     }
 
-    public List<QuestionDto> findAllQuestions() {
-        List<Question> questions = questionMapper.findAllQuestions();
-
+    public List<QuestionDto> findAllQuestions(String tag) {
+        List<Question> questions;
+        if (tag.equals("全部")) {
+            questions = questionMapper.findAllQuestions();
+        } else {
+            questions = questionMapper.findAllQuestionsByTag(tag);
+        }
 
         List<QuestionDto> ret = new LinkedList<>();
         for (Question question : questions) {
@@ -127,5 +131,19 @@ public class QuestionService {
         QuestionDto questionDto = new QuestionDto();
         BeanUtils.copyProperties(question, questionDto);
         return questionDto;
+    }
+
+    public List<QuestionDto> getRelativeQuestions(QuestionDto questionDto) {
+        List<Question> questions = questionMapper.findRelativeQuestions(questionDto);
+        List<QuestionDto> ret = new LinkedList<>();
+        for (Question question : questions) {
+            User user = userMapper.selectById(question.getCreator());
+
+            QuestionDto questionDto1 = new QuestionDto();
+            BeanUtils.copyProperties(question, questionDto1);
+            questionDto1.setUser(user);
+            ret.add(questionDto1);
+        }
+        return ret;
     }
 }

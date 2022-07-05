@@ -44,4 +44,10 @@ public interface QuestionMapper {
 
     @Select("select * from questions where id = #{questId}")
     Question getQuestionById(@Param("questId") Integer questId);
+
+    @Select("select * from questions where id != #{id} and tag regexp #{tag}")
+    List<Question> findRelativeQuestions(QuestionDto question);
+
+    @Select("select * from questions where tag regexp #{tag}")
+    List<Question> findAllQuestionsByTag(String tag);
 }

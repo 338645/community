@@ -64,6 +64,13 @@
             <version>2.6.4</version>
         </dependency>
 
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.6.4</version>
+        </dependency>
+
         <!--okHttp:java程序内建立http请求-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>

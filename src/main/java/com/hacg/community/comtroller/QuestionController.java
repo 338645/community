@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hacg.community.dto.QuestionDto;
 import com.hacg.community.groups.publish.QuestionDefault;
-import com.hacg.community.model.Question;
 import com.hacg.community.service.QuestionService;
 import com.hacg.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(allowCredentials = "true", originPatterns = "*")
@@ -28,10 +28,11 @@ public class QuestionController {
     @GetMapping("/getQuestions")
     public List<QuestionDto> getQuestions(@RequestParam(name = "pageSize") Integer pageSize,
                                           @RequestParam(name = "currentPage") Integer currentPage,
+                                          @RequestParam(name = "tag") String tag,
                                           HttpServletResponse response) {
         Page<Object> page = PageHelper.startPage(currentPage, pageSize);
 
-        List<QuestionDto> questions = questionService.findAllQuestions();
+        List<QuestionDto> questions = questionService.findAllQuestions(tag);
 
         PageInfo<Object> pageInfo = page.toPageInfo();
         long total = pageInfo.getTotal();
@@ -77,4 +78,16 @@ public class QuestionController {
     public QuestionDto getQuestionById(@RequestParam("questId") Integer questId) {
         return questionService.getQuestionById(questId);
     }
+
+    @PostMapping("/getRelativeQuestions")
+    public List<QuestionDto> getRelativeQuestions(@RequestBody QuestionDto questionDto) {
+        if (questionDto.getTag() == null) {
+            return new ArrayList<>();
+        } else {
+            questionDto.setTag(questionDto.getTag().replace(",", "|"));
+        }
+        List<QuestionDto> ret = questionService.getRelativeQuestions(questionDto);
+        return ret;
+    }
+
 }

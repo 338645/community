@@ -17,6 +17,19 @@ spring:
     username: "susu"
     password: "123456"
     driver-class-name: "org.h2.Driver"
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 2000
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait:
+        min-idle: 0
+        max-active: 8
+
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -28,3 +41,4 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: pageNum=currentPage
+

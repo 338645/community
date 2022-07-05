@@ -34,8 +34,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="表明" domainObjectName="实体类名">
-        </table>-->
+        <table tableName="notification" domainObjectName="Notification">
+        </table>
 
     </context>
 </generatorConfiguration>

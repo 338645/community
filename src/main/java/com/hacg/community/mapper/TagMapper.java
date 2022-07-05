@@ -18,6 +18,15 @@ public interface TagMapper {
     @Delete("delete from tags where question_id = #{id}")
     int deleteQuestionByQId(Integer id);
 
-    @Select("select distinct tag from tags")
+    //@Select("select distinct tag from tags")
+    @Select({"<script>",
+            "select distinct s.TAG,count(s.TAG) questCount",
+            "from TAGS s",
+            "join QUESTIONS e",
+            "on e.id = s.QUESTION_ID",
+            "group by s.TAG",
+            "order by questCount desc",
+            "</script>"
+    })
     List<String> selectTags();
 }
