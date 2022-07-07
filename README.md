@@ -72,7 +72,15 @@ UI框架：vue+element-plus
 
 [springboot使用pageHelper](https://blog.csdn.net/qq_37699336/article/details/113795004)
 
+[上传文件太大](https://blog.csdn.net/M_y_y/article/details/84335945)
+
+[读取multipart文件上传](https://blog.51cto.com/u_8865295/5224480?b=totalstatistic)
+
 ## 工具
+
+[md-editor-v3](https://github.com/imzbf/md-editor-v3/blob/dev/README-CN.md)
+
+[markdown editor](https://pandao.github.io/editor.md/)
 
 [visual Paradigm](https://www.visual-paradigm.com)
 

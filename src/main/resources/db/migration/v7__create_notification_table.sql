@@ -4,7 +4,7 @@ create table notification
     notifier   int                   not null,
     receiver   int                   not null,
     type       int,
-    "outerId"  int                   not null,
+    OUTERID    int                   not null,
     gmt_create bigint                not null,
     status     boolean default false not null,
     constraint NOTIFICATION_PK

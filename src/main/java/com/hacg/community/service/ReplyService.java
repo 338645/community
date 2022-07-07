@@ -53,7 +53,7 @@ public class ReplyService {
 
     private void createNotification(Reply reply, NotificationTypeEnum notifType, NotificationStatusEnum status) {
         Notification notification = new Notification();
-        notification.setOuterid(reply.getId());
+        notification.setOuterid(notifType.getType() == 1 ? reply.getQuestId() : reply.getId());
         notification.setNotifier(reply.getUserId());
         notification.setReceiver(questionMapper.findQuestionById(reply.getQuestId()).getCreator());
         notification.setGmtCreate(System.currentTimeMillis());
@@ -116,6 +116,9 @@ public class ReplyService {
         PageInfo<Object> pageInfo = page.toPageInfo();
         reply.setSubReplys(subReplysD);
         reply.getSubPageInfo().setTotal(pageInfo.getTotal());
+
+        //新增通知
+        createNotification(insertReply, NotificationTypeEnum.REPLY_REPLY, NotificationStatusEnum.UNREAD);
 
         return reply;
     }

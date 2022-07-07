@@ -34,4 +34,6 @@ public class ReplyDto {
 
     private Integer parent;
 
+    private QuestionDto question;
+
 }
