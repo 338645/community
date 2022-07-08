@@ -35,7 +35,9 @@ public class ReplyController {
         List<ReplyDto> ret = replyService.getReplys(questionId);
         PageInfo<Object> pageInfo = page.toPageInfo();
         long total = pageInfo.getTotal();
-        response.addCookie(new Cookie("ReplyTotal", String.valueOf(total)));
+        Cookie cookie = new Cookie("ReplyTotal", String.valueOf(total));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return ret;
     }
 

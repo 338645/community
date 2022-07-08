@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.hacg.community.dto.NotificationDto;
 import com.hacg.community.service.NotificationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @CrossOrigin(allowCredentials = "true", originPatterns = "*")
@@ -30,7 +32,9 @@ public class NotificationController {
         Page<Object> page = PageHelper.startPage(currentPage, pageSize);
         List<NotificationDto> ret = notificationService.getNotifications(userId);
         long total = page.getTotal();
-        response.addCookie(new Cookie("NotificationTotal", String.valueOf(total)));
+        Cookie cookie = new Cookie("NotificationTotal", String.valueOf(total));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return ret;
     }
 

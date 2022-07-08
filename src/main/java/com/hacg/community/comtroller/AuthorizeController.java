@@ -2,12 +2,14 @@ package com.hacg.community.comtroller;
 
 import com.hacg.community.model.User;
 import com.hacg.community.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 
 /**
  * 项目关于web操作相关控制器
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin(allowCredentials = "true", originPatterns = "*")
 @RestController
+@Slf4j
 public class AuthorizeController {
 
     /**
@@ -39,6 +42,8 @@ public class AuthorizeController {
     @Autowired
     private UserService userService;
 
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
     /**
      * @param code:从github的authorize传入的code，用于post给github的access_token
      * @param state：防止跨站请求伪造攻击的随机数
@@ -49,18 +54,22 @@ public class AuthorizeController {
                          @RequestParam(name = "state") String state,
                          HttpServletRequest request,
                          HttpServletResponse response) {
+        log.debug(format.format(System.currentTimeMillis()) + "---AuthorizeController.callback---正在插入用户code:" + code + ",state:" + state);
         //插入用户
         User user = userService.insertUser(code, state);
 
 
         if (user != null) {
             //发送给浏览器一个cookie，默认expire时间为session
-            response.addCookie(new Cookie("token", user.getToken()));
+            Cookie cookie = new Cookie("token", user.getToken());
+            cookie.setPath("/");
+            response.addCookie(cookie);
             request.getSession().setAttribute("user", user);
             //登录成功返回用户
             return user;
             //return null;
         } else {
+            log.error(format.format(System.currentTimeMillis()) + "---AuthorizeController.callback--登录操作失败,{}", user);
             //登录失败操作
             return null;
         }

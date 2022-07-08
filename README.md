@@ -76,6 +76,10 @@ UI框架：vue+element-plus
 
 [读取multipart文件上传](https://blog.51cto.com/u_8865295/5224480?b=totalstatistic)
 
+[解决COOKIE失效问题](https://blog.csdn.net/weixin_41500775/article/details/120338602l)
+
+[springboot加日志](https://docs.spring.io/spring-boot/docs/2.7.1/reference/htmlsingle/#features.logging)
+
 ## 工具
 
 [md-editor-v3](https://github.com/imzbf/md-editor-v3/blob/dev/README-CN.md)

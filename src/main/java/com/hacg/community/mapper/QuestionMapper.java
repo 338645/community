@@ -50,4 +50,19 @@ public interface QuestionMapper {
 
     @Select("select * from questions where tag regexp #{tag}")
     List<Question> findAllQuestionsByTag(String tag);
+
+    @Select({
+            "<script>",
+            "select * from questions",
+            "<where>",
+            "<if test='search != null'>",
+            "and title regexp #{search}",
+            "</if>",
+            "<if test='tag != null'>",
+            "and tag regexp #{tag}",
+            "</if>",
+            "</where>",
+            "</script>"
+    })
+    List<Question> findSearchQuestions(String tag, String search);
 }

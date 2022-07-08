@@ -147,4 +147,21 @@ public class QuestionService {
         }
         return ret;
     }
+
+    public List<QuestionDto> searchQuest(String tag, String search) {
+        if (tag.equals("")) tag = null;
+        if (search.equals("")) search = null;
+        List<Question> questions = questionMapper.findSearchQuestions(tag, search);
+
+        List<QuestionDto> ret = new LinkedList<>();
+        for (Question question : questions) {
+            User user = userMapper.selectById(question.getCreator());
+
+            QuestionDto questionDto = new QuestionDto();
+            BeanUtils.copyProperties(question, questionDto);
+            questionDto.setUser(user);
+            ret.add(questionDto);
+        }
+        return ret;
+    }
 }

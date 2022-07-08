@@ -36,7 +36,9 @@ public class QuestionController {
 
         PageInfo<Object> pageInfo = page.toPageInfo();
         long total = pageInfo.getTotal();
-        response.addCookie(new Cookie("questionTotal", String.valueOf(total)));
+        Cookie cookie = new Cookie("questionTotal", String.valueOf(total));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return questions;
     }
 
@@ -53,7 +55,9 @@ public class QuestionController {
 
         PageInfo<Object> pageInfo = page.toPageInfo();
         long total = pageInfo.getTotal();
-        response.addCookie(new Cookie("UserQuestionTotal", String.valueOf(total)));
+        Cookie cookie = new Cookie("UserQuestionTotal", String.valueOf(total));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return questions;
     }
 
@@ -87,6 +91,24 @@ public class QuestionController {
             questionDto.setTag(questionDto.getTag().replace(",", "|"));
         }
         List<QuestionDto> ret = questionService.getRelativeQuestions(questionDto);
+        return ret;
+    }
+
+
+    @GetMapping("/search")
+    public List<QuestionDto> search(@RequestParam("pageSize") Integer pageSize,
+                                    @RequestParam("currentPage") Integer currentPage,
+                                    @RequestParam("tag") String tag,
+                                    @RequestParam("search") String search,
+                                    HttpServletResponse response
+    ) {
+        Page<Object> page = PageHelper.startPage(currentPage, pageSize);
+        List<QuestionDto> ret = questionService.searchQuest(tag, search);
+        PageInfo<Object> pageInfo = page.toPageInfo();
+        long total = pageInfo.getTotal();
+        Cookie cookie = new Cookie("questionTotal", String.valueOf(total));
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return ret;
     }
 

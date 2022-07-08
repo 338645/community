@@ -48,6 +48,7 @@ public class NotificationService {
     public List<NotificationDto> getNotifications(Integer userId) {
         NotificationExample example = new NotificationExample();
         example.createCriteria().andReceiverEqualTo(userId);
+        example.setOrderByClause("status");
         List<Notification> notificationList = notificationMapper.selectByExample(example);
         List<NotificationDto> ret = new LinkedList<>();
         for (Notification notification : notificationList) {
