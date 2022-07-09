@@ -1,8 +1,6 @@
-2022-07-08 14:53:25.501  INFO 22100 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-07-08 14:53:31.588  INFO 22100 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-07-08 14:53:32.757  WARN 22100 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-07-08 14:53:34.333  INFO 22100 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2022-07-08 14:53:36.292  INFO 22100 --- [main] com.hacg.community.ApplicationTests      : Started ApplicationTests in 14.386 seconds (JVM running for 15.587)
-2022-07-08 14:53:36.496  INFO 22100 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-07-08 14:53:36.499  INFO 22100 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-07-08 14:53:36.503  INFO 22100 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-07-09 23:16:25.520  INFO 15840 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-09 23:16:25.522  INFO 15840 --- [http-nio-8887-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-07-09 23:16:25.752  WARN 15840 --- [http-nio-8887-exec-10] o.a.c.w.AbstractFileResourceSet          : Resource for web application [] at path [/...] was not loaded as the canonical path [/] did not match. Use of symlinks is one possible cause.
+2022-07-09 23:16:34.237  INFO 15840 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-07-09 23:16:34.239  INFO 15840 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-07-09 23:16:34.241  INFO 15840 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

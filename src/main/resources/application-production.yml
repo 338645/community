@@ -1,0 +1,68 @@
+#tomcat服务器配置
+server:
+  port: 8887
+  jetty:
+    max-http-form-post-size: -1
+
+#github第三方授权令牌设置
+github:
+  client_id: "ae6d4adb632935201bcb"
+  client_secret: "ce3064a20497fb4c8cb1a61c84190c2622228d08"
+  redirect_uri: "http://1.14.206.60/"
+
+#Mybatis的配置
+spring:
+  datasource:
+    url: "jdbc:h2:~/community;MODE=MySQL"
+    username: "susu"
+    password: "123456"
+    driver-class-name: "org.h2.Driver"
+  #redis配置
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 2000
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait:
+        min-idle: 0
+        max-active: 8
+  servlet:
+    #文件上传配置
+    multipart:
+      max-file-size: 2000MB
+      max-request-size: 2500MB
+
+#mybatis-generator配置
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: "com.hacg.community.model"
+  mapper-locations: "classpath:mapper/*.xml"
+
+#分页设置
+pagehelper:
+  helper-dialect: h2
+  reasonable: true
+  support-methods-arguments: true
+  params: pageNum=currentPage
+
+#日志配置
+logging:
+  file:
+    path: logs
+  level:
+    root: info
+    org.org.springframework.web: debug
+    org.hibernate: error
+    com.hacg.community.mapper: debug
+    com.hacg.community.controller: debug
+  charset:
+    console: UTF-8
+  logback:
+    rollingpolicy:
+      max-file-size: 1KB
+      max-history: 3
